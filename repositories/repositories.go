@@ -8,4 +8,5 @@ import (
 func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	api := app.Group("/api")
 	InitBookRepository(db).SetupRoutes(api)
+	InitUserRepository(db).SetupRoutes(api)
 }

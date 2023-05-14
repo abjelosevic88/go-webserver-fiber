@@ -10,7 +10,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/joho/godotenv"
+	"golang.org/x/crypto/bcrypt"
 )
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 4)
+	return string(bytes), err
+}
 
 func main() {
 	err := godotenv.Load(".env")

@@ -33,7 +33,7 @@ func (br *BookRepository) SetupRoutes(rootAPI fiber.Router) {
 }
 
 func (br *BookRepository) CreateBook(context *fiber.Ctx) error {
-	book := models.Books{}
+	book := models.Book{}
 
 	err := context.BodyParser(&book)
 
@@ -66,7 +66,7 @@ func (br *BookRepository) CreateBook(context *fiber.Ctx) error {
 }
 
 func (br *BookRepository) DeleteBook(context *fiber.Ctx) error {
-	bookModel := models.Books{}
+	bookModel := models.Book{}
 	id := context.Params("id")
 
 	if id == "" {
@@ -101,7 +101,7 @@ func (br *BookRepository) GetBooks(context *fiber.Ctx) error {
 
 	sess.Set("name", "Alex123")
 
-	bookModels := []models.Books{}
+	bookModels := []models.Book{}
 	err = br.DB.Find(&bookModels).Error
 
 	if err != nil {
@@ -144,7 +144,7 @@ func (br *BookRepository) GetBookByID(context *fiber.Ctx) error {
 		return nil
 	}
 
-	bookModel := models.Books{}
+	bookModel := models.Book{}
 
 	err = br.DB.Where("id = ?", id).First(&bookModel).Error
 

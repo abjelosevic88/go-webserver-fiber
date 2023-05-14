@@ -1,10 +1,15 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 func Migrate(db *gorm.DB) error {
-	err := MigrateBooks(db)
-	if err != nil {
+	if err := MigrateBooks(db); err != nil {
+		return err
+	}
+
+	if err := MigrateUsers(db); err != nil {
 		return err
 	}
 
