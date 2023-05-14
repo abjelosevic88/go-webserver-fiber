@@ -19,16 +19,14 @@ func InitUserRepository(db *gorm.DB) *UserRepository {
 }
 
 func (ur *UserRepository) SetupRoutes(rootAPI fiber.Router) {
-	api := rootAPI.Group("/users", func(c *fiber.Ctx) error {
-		return middlewares.Auth(c, ur.DB)
-	})
+	api := rootAPI.Group("/users", middlewares.Auth)
 	api.Get("/", ur.GetUserData)
 }
 
-func (ur *UserRepository) GetUserData(context *fiber.Ctx) error {
-	user := context.Locals("user")
+func (ur *UserRepository) GetUserData(ctx *fiber.Ctx) error {
+	user := ctx.Locals("user")
 
-	context.Status(http.StatusOK).JSON(fiber.Map{
+	ctx.Status(http.StatusOK).JSON(fiber.Map{
 		"message": "User found!",
 		"data":    user,
 	})
