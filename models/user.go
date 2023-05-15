@@ -6,10 +6,12 @@ import (
 )
 
 type User struct {
+	gorm.Model
 	ID       uint    `json:"id" gorm:"primary key;autoIncrement"`
 	Name     *string `json:"name" validate:"required,min=3,max=32"`
 	Username *string `json:"username" validate:"required,min=3,max=32"`
 	Password *string `json:"password" validate:"required,min=3,max=5"`
+	Books    []Book  `json:"books"`
 }
 
 func (b *User) Validate() []*utils.ErrorResponse {

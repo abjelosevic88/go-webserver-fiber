@@ -54,9 +54,9 @@ func (ar *AuthRepository) Login(ctx *fiber.Ctx) error {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub":    userModel.Username,
-		"sub-id": userModel.ID,
-		"exp":    time.Now().Add(time.Hour * 72).Unix(),
+		"sub":   userModel.Username,
+		"subID": userModel.ID,
+		"exp":   time.Now().Add(time.Hour * 72).Unix(),
 	})
 	jwtToken, err := token.SignedString([]byte(os.Getenv("JWT_KEY")))
 

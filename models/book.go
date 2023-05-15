@@ -11,6 +11,8 @@ type Book struct {
 	Author    *string `json:"author" validate:"required,min=3,max=32"`
 	Title     *string `json:"title" validate:"required,min=3,max=5"`
 	Publisher *string `json:"publisher" validate:"required,min=3,max=32"`
+	User      User    `gorm:"foreignKey:UserID;references:id"`
+	UserID    uint
 }
 
 func (b *Book) Validate() []*utils.ErrorResponse {
