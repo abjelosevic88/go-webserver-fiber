@@ -46,6 +46,7 @@ func (ur *UserRepository) GetAllBooks(ctx *fiber.Ctx) error {
 		ctx.Status(http.StatusInternalServerError).JSON(fiber.Map{
 			"message": "Error getting books!",
 		})
+		return err
 	}
 
 	books := make([]interface{}, len(userModel.Books))

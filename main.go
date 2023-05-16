@@ -19,8 +19,7 @@ func HashPassword(password string) (string, error) {
 }
 
 func main() {
-	err := godotenv.Load(".env")
-	if err != nil {
+	if err := godotenv.Load(".env"); err != nil {
 		log.Fatal(err)
 	}
 
@@ -36,8 +35,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = models.Migrate(db)
-	if err != nil {
+	if models.Migrate(db); err != nil {
 		log.Fatal("Could not migrate db!")
 	}
 

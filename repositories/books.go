@@ -35,23 +35,18 @@ func (br *BookRepository) SetupRoutes(rootAPI fiber.Router) {
 func (br *BookRepository) CreateBook(context *fiber.Ctx) error {
 	book := models.Book{}
 
-	err := context.BodyParser(&book)
-
-	if err != nil {
+	if err := context.BodyParser(&book); err != nil {
 		context.Status(http.StatusUnprocessableEntity).JSON(fiber.Map{
 			"message": "Request failed!",
 		})
 		return err
 	}
 
-	errors := book.Validate()
-	if errors != nil {
+	if errors := book.Validate(); errors != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(errors)
 	}
 
-	err = br.DB.Create(&book).Error
-
-	if err != nil {
+	if err := br.DB.Create(&book).Error; err != nil {
 		context.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"message": "Could not create book!",
 		})
