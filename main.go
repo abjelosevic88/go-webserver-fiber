@@ -44,5 +44,5 @@ func main() {
 	app.Use(requestid.New())
 	repositories.SetupRoutes(app, db)
 
-	app.Listen("localhost:8080")
+	app.Listen(":8080")
 }
